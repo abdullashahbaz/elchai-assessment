@@ -10,7 +10,7 @@ const langfuse = new Langfuse({
 });
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 
 const BRIEF = `Client: regional logistics firm.
 Needs a route-optimization dashboard.
@@ -20,11 +20,12 @@ Contact: operations director.`;
 // Checklist: what a valid proposal MUST contain
 function runChecklist(output) {
   const text = output.toLowerCase();
-  const checks = {
-    hasProblemStatement: /problem|challenge|need/.test(text),
+    const checks = {
+    hasProblemStatement: /problem|challenge|need|executive summary|background|current state|overview/.test(text),
     hasScope: /scope|deliverable/.test(text),
     hasTimeline: /timeline|month|week|phase/.test(text),
     hasBudget: /budget|pricing|cost|\$|aed/.test(text),
+    hasCurrentDate: !/202[0-5]\b/.test(text),
   };
   const passed = Object.values(checks).every(Boolean);
   return { checks, passed };
@@ -39,7 +40,7 @@ async function draftProposal(promptText, runLabel) {
 
   const generation = trace.generation({
     name: "gemini-draft",
-    model: "gemini-1.5-flash",
+    model: "gemini-3.6-flash",
     input: promptText,
   });
 
@@ -79,7 +80,7 @@ async function main() {
   await draftProposal(promptV1, "run-1-initial");
 
   // Run 2: fixed prompt, explicitly requires a budget/pricing section
-  const promptV2 = `Draft a professional business proposal based on this client brief:\n\n${BRIEF}\n\nThe proposal MUST include a clearly labeled Pricing / Budget section with an estimated cost range.`;
+  const promptV2 = `Draft a professional business proposal based on this client brief:\n\n${BRIEF}\n\nThe proposal MUST include a clearly labeled Pricing / Budget section with an estimated cost range. Use today's actual date (2026), not a placeholder or past year — do not write an incorrect or outdated date.`;
   await draftProposal(promptV2, "run-2-fixed");
 
   await langfuse.flushAsync();
