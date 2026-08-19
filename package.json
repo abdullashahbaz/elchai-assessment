@@ -1,0 +1,10 @@
+{
+  "name": "elchai-assessment",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "langfuse": "^3.29.0",
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.4.5"
+  }
+}
