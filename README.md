@@ -37,8 +37,9 @@ This will:
 ## 6. Capture your evidence
 Go to your Langfuse dashboard → Traces. You should see two traces:
 `run-1-initial` and `run-2-fixed`. Open each one, screenshot the input/output and
-the score, and send them to me. I'll drop the real screenshots into the assessment
-PDF in place of the simulated example.
+the score. I have attached my commits as you can see below 
+https://cloud.langfuse.com/project/cmszoprro01u9ad0ce9hf46rv/traces/e9e01566-5d78-4277-8aaf-a97ccff46dcb?observation=e4bbbf4b-b6d5-4ecd-b5e5-ef892ca6d5a1 which is the gemini draft run 1
+https://cloud.langfuse.com/project/cmszoprro01u9ad0ce9hf46rv/traces/58b6a63d-5b81-4bba-93a6-6b10994ced60?observation=4e99cad3-577c-466f-b209-6e3949c519a3 which is gemini draft run 2 with a date.
 
-## If something errors
-Copy the exact error message here (not your key values) and I'll help you fix it.
+Below are the initial errors i was facing 
+https://cloud.langfuse.com/project/cmszoprro01u9ad0ce9hf46rv/traces/64425a33-a1fb-4420-a488-3000d7b26dfe?observation=cef8bef1-53fd-4075-86fc-5c64d98b59c0
